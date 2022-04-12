@@ -12,5 +12,5 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 const listener = app.listen(PORT, () => {
-  process.stdout.write(`${clc.greenBright(`Started on port ${clc.yellow(listener.address().port)}`)}\n`);
+  process.stdout.write(`Started on port ${clc.yellow(listener.address().port)}\n`);
 });
