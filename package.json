@@ -1,24 +1,23 @@
 {
-  "name": "empty",
-  "description": "An empty schema with no models, to build your own your own schema",
-  "license": "UNLICENSED",
+  "name": "webpro-backend",
+  "version": "1.0.0",
+  "private": true,
   "dependencies": {
     "@prisma/client": "3.4.2"
   },
   "devDependencies": {
-    "@types/node": "16.11.7",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "prisma": "3.4.2",
-    "ts-node": "10.4.0",
-    "typescript": "4.4.4"
+    "prisma": "3.4.2"
   },
   "scripts": {
-    "dev": "ts-node ./sandbox.ts",
-    "build": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate"
+    "dev": "node ./index.js",
+    "pm:build": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate",
+    "pm:pull": "prisma db pull",
+    "pm:push": "prisma db push"
   }
 }
