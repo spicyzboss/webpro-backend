@@ -16,10 +16,12 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "nodemon": "^2.0.15",
     "prisma": "3.4.2"
   },
   "scripts": {
-    "dev": "node ./index.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "pm:build": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate",
     "pm:pull": "prisma db pull",
     "pm:push": "prisma db push"
