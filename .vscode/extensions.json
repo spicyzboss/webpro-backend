@@ -1,11 +1,6 @@
 {
     "recommendations": [
-        "formulahendry.auto-close-tag",
-        "formulahendry.auto-rename-tag",
         "dbaeumer.vscode-eslint",
-        "bradlc.vscode-tailwindcss",
-        "heybourn.headwind",
-        "octref.vetur",
-        "jcbuisson.vue"
+        "Prisma.prisma",
     ]
 }
