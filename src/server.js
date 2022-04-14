@@ -1,3 +1,6 @@
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
 import clc from 'cli-color';
 import { config } from 'dotenv';
 import app from './app';

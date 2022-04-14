@@ -2,14 +2,30 @@
   "name": "webpro-backend",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "start": "yarn build && node dist/server.js",
+    "dev": "nodemon --exec babel-node server.js",
+    "pm:build": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate",
+    "pm:pull": "prisma db pull",
+    "pm:push": "prisma db push",
+    "test": "yarn test:dev && yarn test:lint",
+    "test:dev": "jest",
+    "test:lint": "eslint .",
+    "build": "yarn clean && yarn build:js",
+    "build:js": "babel ./src -d ./dist --copy-files",
+    "clean": "rimraf ./dist"
+  },
   "dependencies": {
     "@prisma/client": "3.4.2",
     "body-parser": "^1.20.0",
     "cli-color": "^2.0.2",
+    "core-js": "^3.21.1",
     "dotenv": "^16.0.0",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
+    "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
@@ -22,14 +38,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
-    "prisma": "3.4.2"
-  },
-  "scripts": {
-    "start": "babel-node server.js",
-    "dev": "nodemon --exec babel-node server.js",
-    "pm:build": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate",
-    "pm:pull": "prisma db pull",
-    "pm:push": "prisma db push",
-    "test": "jest"
+    "prisma": "3.4.2",
+    "rimraf": "^3.0.2"
   }
 }

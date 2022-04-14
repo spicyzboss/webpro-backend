@@ -1,4 +1,4 @@
-import isValidMd5 from '../utils/isValidMd5';
+import isValidMd5 from '../src/utils/isValidMd5';
 
 test('non-hex format', () => {
   expect(isValidMd5('123456A8B01234567890123G56789012')).toBe(false);
