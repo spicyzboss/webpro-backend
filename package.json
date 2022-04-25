@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "yarn build && node dist/server.js",
+    "start": "yarn build && node build/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
     "pm:build": "prisma generate",
     "pm:pull": "prisma db pull",
@@ -12,8 +12,8 @@
     "test:dev": "jest",
     "test:lint": "eslint .",
     "build": "yarn clean && yarn build:js",
-    "build:js": "babel ./src -d ./dist --copy-files",
-    "clean": "rimraf ./dist"
+    "build:js": "babel ./src -d ./build --copy-files",
+    "clean": "rimraf ./build"
   },
   "dependencies": {
     "@prisma/client": "3.4.2",
