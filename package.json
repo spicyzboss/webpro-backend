@@ -5,7 +5,7 @@
   "scripts": {
     "start": "yarn build && node dist/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
-    "pm:build": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate",
+    "pm:build": "prisma generate",
     "pm:pull": "prisma db pull",
     "pm:push": "prisma db push",
     "test": "yarn test:dev && yarn test:lint",

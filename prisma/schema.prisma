@@ -14,8 +14,10 @@ model User {
   email      String   @db.VarChar(255)
   password   String   @db.Char(32)
   created_at DateTime @default(now()) @db.Timestamp(3)
-  Member     Member[]
-  Admin      Admin[]
+  Member     Member?
+  Admin      Admin?
+
+  @@map("users")
 }
 
 enum Gender {
@@ -25,18 +27,27 @@ enum Gender {
 }
 
 model Member {
-  user      User   @relation(fields: [id], references: [id])
-  id        Int    @id
-  firstname String @db.VarChar(255)
-  lastname  String @db.VarChar(255)
-  gender    Gender
-  age       Int    @db.SmallInt
+  user           User             @relation(fields: [id], references: [id])
+  id             Int              @id
+  firstname      String           @db.VarChar(255)
+  lastname       String           @db.VarChar(255)
+  gender         Gender
+  age            Int              @db.SmallInt
+  Post           Post[]
+  Premium        Premium?
+  MemberInterest MemberInterest[]
+  MemberMember1  MemberMember[]   @relation("member1")
+  MemberMember2  MemberMember[]   @relation("member2")
+
+  @@map("members")
 }
 
 model Admin {
   user     User   @relation(fields: [id], references: [id])
   id       Int    @id
   codename String @db.VarChar(255)
+
+  @@map("admins")
 }
 
 model Chat {
@@ -45,8 +56,98 @@ model Chat {
   to         Int
   content    String   @db.VarChar(255)
   created_at DateTime @default(now()) @db.Timestamp(3)
+
+  @@map("chats")
 }
 
-model Bruh {
-  id Int @id
+model Blacklist {
+  id         Int      @id @default(autoincrement())
+  reason     String   @db.VarChar(255)
+  created_at DateTime @default(now()) @db.Timestamp(3)
+  member_id  Int
+
+  @@map("blacklists")
+}
+
+model Report {
+  id          Int      @id @default(autoincrement())
+  content     String   @db.VarChar(255)
+  report_from Int
+  report_to   Int
+  created_at  DateTime @default(now()) @db.Timestamp(3)
+
+  @@map("reports")
+}
+
+model Interest {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  PostInterest PostInterest[]
+
+  MemberInterest MemberInterest[]
+  @@map("interests")
+}
+
+model Post {
+  id           Int            @id @default(autoincrement())
+  content      String         @db.VarChar(255)
+  member       Member         @relation(fields: [post_by], references: [id])
+  post_by      Int
+  created_at   DateTime       @default(now()) @db.Timestamp(3)
+  finish_at    DateTime       @db.Timestamp(3)
+  GroupChat    GroupChat[]
+  PostInterest PostInterest[]
+
+  @@map("posts")
+}
+
+model GroupChat {
+  id         Int      @id @default(autoincrement())
+  from       Int
+  content    String   @db.VarChar(255)
+  created_at DateTime @default(now()) @db.Timestamp(3)
+  post       Post     @relation(fields: [post_id], references: [id])
+  post_id    Int
+
+  @@map("group_chats")
+}
+
+model Premium {
+  id        Int      @id @default(autoincrement())
+  since     DateTime @default(now()) @db.Timestamp(3)
+  member    Member   @relation(fields: [member_id], references: [id])
+  member_id Int      @unique
+
+  @@map("premiums")
+}
+
+model PostInterest {
+  id          Int      @id @default(autoincrement())
+  post        Post     @relation(fields: [post_id], references: [id])
+  post_id     Int      @unique
+  interest    Interest @relation(fields: [interest_id], references: [id])
+  interest_id Int      @unique
+
+  @@map("post_interests")
+}
+
+model MemberInterest {
+  id          Int      @id @default(autoincrement())
+  member      Member   @relation(fields: [member_id], references: [id])
+  member_id   Int      @unique
+  interest    Interest @relation(fields: [interest_id], references: [id])
+  interest_id Int      @unique
+
+  @@map("member_interests")
+}
+
+model MemberMember {
+  id        Int      @id @default(autoincrement())
+  member_id Int      @unique
+  member    Member   @relation("member1", fields: [member_id], references: [id])
+  friend_id Int      @unique
+  friend    Member   @relation("member2", fields: [friend_id], references: [id])
+  since     DateTime @default(now()) @db.Timestamp(3)
+
+  @@map("member_members")
 }
