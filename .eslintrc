@@ -4,6 +4,7 @@
         "jest/globals": true
     },
     "rules": {
-        "max-len": "off"
+        "max-len": "off",
+        "linebreak-style": "off"
     }
 }
