@@ -1,4 +1,31 @@
-# Empty Prisma Project
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/import?repository-url=https%3A%2F%2Fgithub.com%2Fspicyzboss%2Fwebpro-backend&env=DATABASE_URL,DATABASE_MIGRATE_URL,PRISMA_CLIENT_ENGINE_TYPE&envDescription=Database%20connection%20strings%20your%20app%20depends%20on.%20You%20should%20switch%20back%20to%20the%20Prisma%20Data%20Platform%20to%20figure%20out%20what%20values%20to%20input%20here.)<br />
+# Patty's Backend
 
-An empty Prisma Schema with no models, perfect as a starting point for your own schema.
+เป็นหลังบ้านของโปรเจ็ค Patty ซึ่งจะเป็นจำพวก service ที่เกี่ยวกับระบบ CRUD ซะเป็นส่วนใหญ่
+
+## Installation
+
+via npm
+
+```bash
+npm i
+```
+
+via yarn
+
+```bash
+yarn
+```
+
+## Development
+
+via npm
+
+```bash
+npm run dev
+```
+
+via yarn
+
+```bash
+yarn dev
+```
