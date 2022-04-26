@@ -4,32 +4,61 @@ import isValidMd5 from '../utils/isValidMd5';
 const prisma = new PrismaClient();
 
 const register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const {
+    firstname, lastname, gender, age, email, password,
+  } = req.body;
 
   if (!isValidMd5(password)) {
     res.status(400).json({
-      message: 'Password not safe',
+      status: {
+        message: 'Password not safe',
+      },
+      user: {},
     });
   } else {
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password,
-      },
-    });
+    /** @type {import('@prisma/client').User} */
+    try {
+      const user = await prisma.user.create({
+        data: {
+          email,
+          password,
+          Member: {
+            create: {
+              firstname,
+              lastname,
+              gender,
+              age,
+            },
+          },
+        },
+      });
 
-    if (user) {
+      /** @type {import('@prisma/client').Member} */
+      const member = await prisma.member.findUnique({
+        where: {
+          id: user.id,
+        },
+      });
+
       res.json({
+        status: {
+          message: 'Login Successfully',
+        },
         user: {
           id: user.id,
-          name: user.name,
+          firstname: member.firstname,
+          lastname: member.lastname,
+          age: member.age,
+          gender: member.gender,
           email: user.email,
         },
       });
-    } else {
+    } catch (err) {
       res.status(500).json({
-        message: 'Database Server Error',
+        status: {
+          message: 'Database Server Error',
+        },
+        user: {},
       });
     }
   }
