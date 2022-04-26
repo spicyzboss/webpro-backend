@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 const login = async (req, res) => {
   const { email, password } = req.body;
 
+  /** @type {import('@prisma/client').User} */
   const user = await prisma.user.findFirst({
     where: {
       email,
@@ -12,17 +13,33 @@ const login = async (req, res) => {
     },
   });
 
-  if (user) {
+  /** @type {import('@prisma/client').Member} */
+  const member = await prisma.member.findUnique({
+    where: {
+      id: user.id,
+    },
+  });
+
+  if (user && member) {
     res.json({
+      status: {
+        message: 'Login successfully',
+      },
       user: {
         id: user.id,
-        name: user.name,
+        firstname: member.firstname,
+        lastname: member.lastname,
+        age: member.age,
+        gender: member.gender,
         email: user.email,
       },
     });
   } else {
     res.status(401).json({
-      message: 'Invalid credentials',
+      status: {
+        message: 'Invalid credentials',
+      },
+      user: {},
     });
   }
 };
