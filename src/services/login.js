@@ -32,6 +32,7 @@ const login = async (req, res) => {
         age: member.age,
         gender: member.gender,
         email: user.email,
+        isVerified: user.isVerified,
       },
     });
   } else {
