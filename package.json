@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "yarn build && node build/server.js",
+    "start": "node build/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
     "pm:build": "prisma generate",
     "pm:pull": "prisma db pull",
@@ -23,13 +23,14 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "nodemailer": "^6.7.3",
-    "regenerator-runtime": "^0.13.9"
-  },
-  "devDependencies": {
+    "regenerator-runtime": "^0.13.9",
+    "rimraf": "^3.0.2",
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11"
+  },
+  "devDependencies": {
     "@babel/node": "^7.16.8",
-    "@babel/preset-env": "^7.16.11",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-plugin-import": "^2.25.3",
@@ -39,7 +40,6 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
-    "prisma": "^3.12.0",
-    "rimraf": "^3.0.2"
+    "prisma": "^3.12.0"
   }
 }
