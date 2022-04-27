@@ -1,7 +1,9 @@
 import { PrismaClient } from '@prisma/client';
+import { config } from 'dotenv';
+import jwt from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
-
+config();
 const login = async (req, res) => {
   const { email, password } = req.body;
 
