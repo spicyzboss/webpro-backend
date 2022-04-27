@@ -23,19 +23,22 @@ const login = async (req, res) => {
   });
 
   if (user && member) {
+    const userData = {
+      id: user.id,
+      firstname: member.firstname,
+      lastname: member.lastname,
+      age: member.age,
+      gender: member.gender,
+      email: user.email,
+      isVerified: user.isVerified,
+    };
+    const token = jwt.sign(userData, process.env.JWT_SECRET_KEY);
     res.json({
       status: {
         message: 'Login successfully',
       },
-      user: {
-        id: user.id,
-        firstname: member.firstname,
-        lastname: member.lastname,
-        age: member.age,
-        gender: member.gender,
-        email: user.email,
-        isVerified: user.isVerified,
-      },
+      user: userData,
+      token,
     });
   } else {
     res.status(401).json({
