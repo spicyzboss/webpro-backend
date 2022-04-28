@@ -1,6 +1,10 @@
 import { PrismaClient } from '@prisma/client';
+import { config } from 'dotenv';
+import jwt from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
+
+config();
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -21,20 +25,25 @@ const login = async (req, res) => {
       },
     });
 
+    const userData = {
+      id: user.id,
+      firstname: member.firstname,
+      lastname: member.lastname,
+      age: member.age,
+      gender: member.gender,
+      email: user.email,
+      isVerified: user.isVerified,
+    };
+
+    const token = jwt.sign(userData, process.env.JWT_SECRET_KEY);
+
     res.json({
       status: {
         code: 200,
         message: 'Login successfully',
       },
-      user: {
-        id: user.id,
-        firstname: member.firstname,
-        lastname: member.lastname,
-        age: member.age,
-        gender: member.gender,
-        email: user.email,
-        isVerified: user.isVerified,
-      },
+      user: userData,
+      token,
     });
   } catch (err) {
     if (err instanceof TypeError) {
