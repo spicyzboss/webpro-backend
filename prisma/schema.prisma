@@ -126,9 +126,9 @@ model Premium {
 model PostInterest {
   id          Int      @id @default(autoincrement())
   post        Post     @relation(fields: [post_id], references: [id])
-  post_id     Int      @unique
+  post_id     Int
   interest    Interest @relation(fields: [interest_id], references: [id])
-  interest_id Int      @unique
+  interest_id Int
 
   @@map("post_interests")
 }
@@ -136,18 +136,18 @@ model PostInterest {
 model MemberInterest {
   id          Int      @id @default(autoincrement())
   member      Member   @relation(fields: [member_id], references: [id])
-  member_id   Int      @unique
+  member_id   Int
   interest    Interest @relation(fields: [interest_id], references: [id])
-  interest_id Int      @unique
+  interest_id Int
 
   @@map("member_interests")
 }
 
 model MemberMember {
   id        Int      @id @default(autoincrement())
-  member_id Int      @unique
+  member_id Int
   member    Member   @relation("member1", fields: [member_id], references: [id])
-  friend_id Int      @unique
+  friend_id Int
   friend    Member   @relation("member2", fields: [friend_id], references: [id])
   since     DateTime @default(now()) @db.Timestamp(3)
 
