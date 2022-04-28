@@ -49,7 +49,7 @@ const login = async (req, res) => {
     if (err instanceof TypeError) {
       res.json({
         status: {
-          code: '401',
+          code: 401,
           message: 'Invalid email or password',
         },
         user: {},
@@ -57,7 +57,7 @@ const login = async (req, res) => {
     } else {
       res.json({
         status: {
-          code: '500',
+          code: 500,
           message: 'Database server error',
         },
         user: {},
