@@ -31,7 +31,7 @@ async function mailSender(id, receiver) {
     },
   });
 
-  const tokenLink = `${process.env.HOST}${process.env.PORT ? `:${process.env.PORT}` : ''}/verify?token=${session.token}`;
+  const tokenLink = `https://api.pattycommunity.com/verify?token=${session.token}`;
 
   try {
     await transporter.sendMail({

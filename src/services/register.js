@@ -9,7 +9,7 @@ const register = async (req, res) => {
   } = req.body;
 
   if (!isValidMd5(password)) {
-    res.status(400).json({
+    res.json({
       status: {
         code: 400,
         message: 'Password not safe',
@@ -24,7 +24,7 @@ const register = async (req, res) => {
       });
 
       if (usedEmail) {
-        res.status(400).json({
+        res.json({
           status: {
             code: 400,
             message: 'This email is not available',
@@ -72,10 +72,10 @@ const register = async (req, res) => {
         });
       }
     } catch (err) {
-      res.status(500).json({
+      res.json({
         status: {
           code: 500,
-          message: 'Database Server Error',
+          message: 'Database server error',
         },
         user: {},
       });
