@@ -4,7 +4,7 @@ COPY . /app
 
 WORKDIR /app
 
-RUN yarn install --frozen-lockfile
+RUN yarn install --prod --frozen-lockfile
 
 RUN yarn build
 
