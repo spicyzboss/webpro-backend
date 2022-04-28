@@ -8,7 +8,11 @@ config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 200,
+  credentials: true,
+}));
 app.use(bodyParser.json());
 
 app.post('/login', login);

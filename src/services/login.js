@@ -5,24 +5,25 @@ const prisma = new PrismaClient();
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  /** @type {import('@prisma/client').User} */
-  const user = await prisma.user.findFirst({
-    where: {
-      email,
-      password,
-    },
-  });
+  try {
+    /** @type {import('@prisma/client').User} */
+    const user = await prisma.user.findFirst({
+      where: {
+        email,
+        password,
+      },
+    });
 
-  /** @type {import('@prisma/client').Member} */
-  const member = await prisma.member.findUnique({
-    where: {
-      id: user.id,
-    },
-  });
+    /** @type {import('@prisma/client').Member} */
+    const member = await prisma.member.findUnique({
+      where: {
+        id: user.id,
+      },
+    });
 
-  if (user && member) {
     res.json({
       status: {
+        code: 200,
         message: 'Login successfully',
       },
       user: {
@@ -35,13 +36,24 @@ const login = async (req, res) => {
         isVerified: user.isVerified,
       },
     });
-  } else {
-    res.status(401).json({
-      status: {
-        message: 'Invalid credentials',
-      },
-      user: {},
-    });
+  } catch (err) {
+    if (err instanceof TypeError) {
+      res.json({
+        status: {
+          code: '401',
+          message: 'Invalid email or password',
+        },
+        user: {},
+      });
+    } else {
+      res.json({
+        status: {
+          code: '500',
+          message: 'Database server error',
+        },
+        user: {},
+      });
+    }
   }
 };
 
