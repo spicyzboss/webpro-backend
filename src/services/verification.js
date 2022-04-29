@@ -21,7 +21,7 @@ const mailVerification = async (req, res) => {
     },
   });
 
-  if (checkedToken && new Date(checkedToken.expired_at).getTime() > Date.now()) {
+  if (checkedToken) {
     await prisma.user.update({
       data: {
         isVerified: true,

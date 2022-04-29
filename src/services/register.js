@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 const register = async (req, res) => {
   const {
-    firstname, lastname, gender, age, email, password,
+    firstname, lastname, gender, birth_date: birthDate, email, password,
   } = req.body;
 
   if (!isValidMd5(password)) {
@@ -41,7 +41,7 @@ const register = async (req, res) => {
                 firstname,
                 lastname,
                 gender,
-                age,
+                birth_date: birthDate,
               },
             },
           },

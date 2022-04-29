@@ -20,14 +20,10 @@ async function mailSender(id, receiver) {
     },
   });
 
-  const expire = new Date();
-  expire.setMinutes(expire.getMinutes() + 10);
-
   const session = await prisma.verificationSession.create({
     data: {
       member_id: id,
       token: generateToken(),
-      expired_at: expire,
     },
   });
 

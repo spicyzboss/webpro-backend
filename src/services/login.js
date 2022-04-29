@@ -29,7 +29,7 @@ const login = async (req, res) => {
       id: user.id,
       firstname: member.firstname,
       lastname: member.lastname,
-      age: member.age,
+      age: new Date().getFullYear() - member.birth_date.getFullYear(),
       gender: member.gender,
       email: user.email,
       isVerified: user.isVerified,
@@ -42,7 +42,6 @@ const login = async (req, res) => {
         code: 200,
         message: 'Login successfully',
       },
-      user: userData,
       token,
     });
   } catch (err) {
@@ -52,7 +51,6 @@ const login = async (req, res) => {
           code: 401,
           message: 'Invalid email or password',
         },
-        user: {},
       });
     } else {
       res.json({
@@ -60,7 +58,6 @@ const login = async (req, res) => {
           code: 500,
           message: 'Database server error',
         },
-        user: {},
       });
     }
   }
