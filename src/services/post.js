@@ -5,21 +5,28 @@ const createPost = async (req, res) => {
   const {
     content, post_by: postBy, finish_at: finishAt, interest,
   } = req.body;
-  const post = await prisma.post.create({
-    data: {
+  const postList = [];
+  for (let i = 0; i < interest.length; i += 1) {
+    postList.push({
       content,
       post_by: postBy,
       finish_at: finishAt,
-    },
+      interest_id: interest[i].id,
+    });
+  }
+  const post = await prisma.post.createMany({
+    data: postList,
+    skipDuplicates: true,
   });
   const interestList = [];
   for (let i = 0; i < interest.length; i += 1) {
     interestList.push({ post_id: post.id, interest_id: interest[i].id });
   }
 
-  // const postInterestCreate = await prisma.postInterest.createMany({
-  //   data: interestList,
-  // });
+  await prisma.postInterest.createMany({
+    data: interestList,
+    skipDuplicates: true,
+  });
 
   if (post) {
     res.json({
@@ -38,6 +45,7 @@ const createPost = async (req, res) => {
 
 const findPost = async (req, res) => {
   const { interest } = req.body;
+
   const interestName = await prisma.Interest.findMany({
     where: {
       name: interest,
