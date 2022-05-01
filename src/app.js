@@ -4,7 +4,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import getUser from './services/authenticated/getUser';
 import auth from './middlewares/auth';
-import { register, login, mailVerification } from './services';
+import {
+  register, login, mailVerification, createPost, findPost,
+} from './services';
 
 config();
 
@@ -24,5 +26,9 @@ app.post('/login', login);
 app.post('/register', register);
 
 app.get('/verify', mailVerification);
+
+app.post('/post', createPost);
+
+app.get('/post', findPost);
 
 export default app;
