@@ -17,22 +17,9 @@ const createPost = async (req, res) => {
     interestList.push({ post_id: post.id, interest_id: interest[i].id });
   }
 
-  const postInterestCreate = await prisma.postInterest.createMany({
-    data: interestList,
-  });
-
-  const relatePostInterest = await prisma.postInterest.findMany({
-    where: { post_id: post.id },
-  });
-
-  await prisma.post.update({
-    where: {
-      id: post.id,
-    },
-    data: {
-      PostInterest: relatePostInterest,
-    },
-  });
+  // const postInterestCreate = await prisma.postInterest.createMany({
+  //   data: interestList,
+  // });
 
   if (post) {
     res.json({
