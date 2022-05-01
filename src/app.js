@@ -2,7 +2,7 @@ import express from 'express';
 import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import {
-  register, login, mailVerification, reportUser, addToBlackLists,
+  register, login, mailVerification, reportUser, addToBlacklists,
 } from './services';
 
 config();
@@ -19,6 +19,6 @@ app.get('/verify', mailVerification);
 
 app.post('/report', reportUser);
 
-app.post('/ban', addToBlackLists);
+app.post('/ban', addToBlacklists);
 
 export default app;

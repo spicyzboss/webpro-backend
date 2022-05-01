@@ -18,8 +18,9 @@ const reportUser = async (req, res) => {
       },
     });
   } else {
-    res.status(401).json({
+    res.json({
       status: {
+        code: 401,
         message: 'report is invalid',
       },
     });
@@ -27,7 +28,7 @@ const reportUser = async (req, res) => {
 };
 const addToBlacklists = async (req, res) => {
   const { member_id: rpID, reason } = req.body;
-  const userBaned = await prisma.report.create({
+  const userBaned = await prisma.blacklist.create({
     data: {
       reason,
       member_id: rpID,
@@ -40,8 +41,9 @@ const addToBlacklists = async (req, res) => {
       },
     });
   } else {
-    res.status(401).json({
+    res.json({
       status: {
+        code: 401,
         message: 'ban is invalid',
       },
     });
