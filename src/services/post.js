@@ -3,9 +3,8 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 const createPost = async (req, res) => {
   const {
-    content, post_by: postBy, finish_at: finishAt,
+    content, post_by: postBy, finish_at: finishAt, interest,
   } = req.body;
-  // เหลือ insertpostinterest
   const post = await prisma.post.create({
     data: {
       content,
@@ -13,6 +12,28 @@ const createPost = async (req, res) => {
       finish_at: finishAt,
     },
   });
+  const interestList = [];
+  for (let i = 0; i < interest.length; i += 1) {
+    interestList.push({ post_id: post.id, interest_id: interest[i].id });
+  }
+
+  const postInterestCreate = await prisma.postInterest.createMany({
+    data: interestList,
+  });
+
+  const relatePostInterest = await prisma.postInterest.findMany({
+    where: { post_id: post.id },
+  });
+
+  await prisma.post.update({
+    where: {
+      id: post.id,
+    },
+    data: {
+      PostInterest: relatePostInterest,
+    },
+  });
+
   if (post) {
     res.json({
       status: {
@@ -30,7 +51,6 @@ const createPost = async (req, res) => {
 
 const findPost = async (req, res) => {
   const { interest } = req.body;
-  // interest = JSON.parse(interest);
   const interestName = await prisma.Interest.findMany({
     where: {
       name: interest,
