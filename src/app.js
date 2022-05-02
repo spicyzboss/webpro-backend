@@ -5,7 +5,7 @@ import cors from 'cors';
 import getUser from './services/authenticated/getUser';
 import auth from './middlewares/auth';
 import {
-  register, login, mailVerification, createPost, findPost,
+  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists,
 } from './services';
 
 config();
@@ -27,8 +27,14 @@ app.post('/register', register);
 
 app.get('/verify', mailVerification);
 
+<<<<<<< HEAD
 app.post('/post', createPost);
 
 app.get('/post', findPost);
+=======
+app.post('/report', reportUser);
+
+app.post('/ban', addToBlacklists);
+>>>>>>> feat/ban
 
 export default app;
