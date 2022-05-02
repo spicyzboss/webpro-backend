@@ -17,6 +17,7 @@ app.use(cors({
   optionsSuccessStatus: 200,
   credentials: true,
 }));
+
 app.use(bodyParser.json());
 
 app.get('/me', auth, getUser);
