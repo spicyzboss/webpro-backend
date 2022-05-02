@@ -5,7 +5,7 @@ import cors from 'cors';
 import getUser from './services/authenticated/getUser';
 import auth from './middlewares/auth';
 import {
-  register, login, mailVerification, createPost, findPost,
+  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists,
 } from './services';
 
 config();
@@ -30,5 +30,9 @@ app.get('/verify', mailVerification);
 app.post('/post', createPost);
 
 app.get('/post', findPost);
+
+app.post('/report', reportUser);
+
+app.post('/ban', addToBlacklists);
 
 export default app;
