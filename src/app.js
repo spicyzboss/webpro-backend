@@ -2,7 +2,9 @@ import express from 'express';
 import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { getUser, payment, verifyPayment } from './services/authenticated';
+import {
+  getUser, payment, verifyPayment, chat,
+} from './services/authenticated';
 import auth from './middlewares/auth';
 import {
   register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists,
@@ -25,6 +27,8 @@ app.get('/me', auth, getUser);
 app.post('/payment', auth, payment);
 
 app.post('/payment/verify', auth, verifyPayment);
+
+app.post('/chat', auth, chat);
 
 app.post('/login', login);
 
