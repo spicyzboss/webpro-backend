@@ -1,7 +1,3 @@
-import { config } from 'dotenv';
-
-config();
-
 const getUser = (req, res) => {
   if (!req.user) {
     return res.json({

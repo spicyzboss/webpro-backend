@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import {
-  getUser, payment, verifyPayment, chat,
+  getUser, payment, verifyPayment, sendChat, getChat,
 } from './services/authenticated';
 import auth from './middlewares/auth';
 import {
@@ -28,7 +28,9 @@ app.post('/payment', auth, payment);
 
 app.post('/payment/verify', auth, verifyPayment);
 
-app.post('/chat', auth, chat);
+app.post('/chat', auth, sendChat);
+
+app.get('/chat', auth, getChat);
 
 app.post('/login', login);
 
