@@ -5,6 +5,7 @@ const createPost = async (req, res) => {
   const {
     content, post_by: postBy, finish_at: finishAt, interest,
   } = req.body;
+
   const post = await prisma.post.create({
     data: {
       content,
@@ -12,24 +13,28 @@ const createPost = async (req, res) => {
       finish_at: finishAt,
     },
   });
-  const interestList = [];
-  for (let i = 0; i < interest.length; i += 1) {
-    interestList.push({ post_id: post.id, interest_id: interest[i].id });
-  }
-
-  // const postInterestCreate = await prisma.postInterest.createMany({
-  //   data: interestList,
-  // });
-
-  if (post) {
+  // console.log(Array.isArray(interest));
+  const PIList = interest.map((each) => (
+    {
+      post_id: post.id,
+      interest_id: each.id,
+    }
+  ));
+  const postInterest = await prisma.postInterest.createMany({
+    data: PIList,
+  });
+  // console.log(postInterest);
+  if (post && postInterest) {
     res.json({
       status: {
+        code: 200,
         message: 'Post was created',
       },
     });
   } else {
     res.json({
       status: {
+        code: 400,
         message: 'Can\'t create post',
       },
     });
@@ -38,17 +43,25 @@ const createPost = async (req, res) => {
 
 const findPost = async (req, res) => {
   const { interest } = req.body;
-  const interestName = await prisma.Interest.findMany({
+  const interestName = interest.map((obj) => obj.name);
+  const interestitem = await prisma.interest.findMany({
     where: {
-      name: interest,
+      name: { in: interestName },
     },
   });
-  if (interestName) {
+  const selectedInterestID = interestitem.map((its) => its.id);
+  const postWhereInterest = await prisma.postInterest.findMany({
+    where: {
+      interest_id: { in: selectedInterestID },
+    },
+  });
+
+  // console.log(selectedInterestID, postWhereInterest);
+  if (postWhereInterest) {
     res.json({
       status: {
         message: 'Query success',
       },
-      interestName,
     });
   } else {
     res.json({
