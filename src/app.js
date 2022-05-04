@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import {
-  getUser, payment, verifyPayment, sendChat, getChat,
+  getUser, payment, verifyPayment, sendChat, getChat, getGroupChat, sendGroupChat,
 } from './services/authenticated';
 import auth from './middlewares/auth';
 import {
@@ -31,6 +31,10 @@ app.post('/payment/verify', auth, verifyPayment);
 app.post('/chat', auth, sendChat);
 
 app.get('/chat', auth, getChat);
+
+app.post('/groupchat', auth, sendGroupChat);
+
+app.get('/groupchat', auth, getGroupChat);
 
 app.post('/login', login);
 
