@@ -1,7 +1,7 @@
 import express from 'express';
 import { config } from 'dotenv';
 import bodyParser from 'body-parser';
-
+import multer from 'multer';
 import cors from 'cors';
 import {
   getUser, payment, verifyPayment, sendChat, getChat,
@@ -15,6 +15,7 @@ import {
 config();
 
 const app = express();
+const upload = multer({ dest: 'temp/' });
 
 app.use(cors({
   origin: '*',
@@ -23,6 +24,7 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/me', auth, getUser);
 
@@ -36,7 +38,7 @@ app.get('/chat', auth, getChat);
 
 app.post('/login', login);
 
-app.post('/register', register);
+app.post('/register', upload.single('profile_image'), register);
 
 app.get('/verify', mailVerification);
 
