@@ -62,11 +62,11 @@ app.get('/get_interest', auth, getInterest);
 
 app.post('/get_idbypost', auth, getIdbyPost);
 
-app.get('/get_postdata', auth, getPostData)
+app.get('/get_postdata', auth, getPostData);
 
-app.post('/get_profilebyid', auth, getProfileById)
+app.post('/get_profilebyid', auth, getProfileById);
 
-app.post('/add_memberinterest', auth, addmemberInterest)
+app.post('/add_memberinterest', auth, addmemberInterest);
 
 app.post('/get_usameint', auth, getUsameInt)
 
