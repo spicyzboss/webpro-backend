@@ -8,7 +8,8 @@ import {
 } from './services/authenticated';
 import auth from './middlewares/auth';
 import {
-  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend,
+  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile,
+
 } from './services';
 
 config();
@@ -48,5 +49,7 @@ app.post('/report', reportUser);
 app.post('/ban', addToBlacklists);
 
 app.post('/add_match', addFriend);
+
+app.put('/edit_profile', editProfile);
 
 export default app;

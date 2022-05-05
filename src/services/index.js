@@ -4,7 +4,10 @@ import mailVerification from './verification';
 import addFriend from './match';
 import { createPost, findPost } from './post';
 import { reportUser, addToBlacklists } from './ban';
+import editProfile from './profile';
 
 export {
-  login, register, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend,
+
+  login, register, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile,
+
 };
