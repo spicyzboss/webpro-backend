@@ -15,6 +15,13 @@ const chat = async (req, res) => {
       },
     });
 
+    const sender = id;
+    const target = to;
+
+    /** @type {import ('socket.io').Socket} */
+    const io = req.app.get('io');
+    io.to(sender).to(target).emit('chat', chatRequest);
+
     res.json({
       status: {
         code: 200,

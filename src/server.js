@@ -3,12 +3,20 @@ import 'regenerator-runtime/runtime';
 
 import clc from 'cli-color';
 import { config } from 'dotenv';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 import app from './app';
 
 config();
 
+const server = createServer(app);
+
+const io = new Server(server);
+
+app.set('io', io);
+
 const PORT = process.env.PORT || 3001;
 
-const listener = app.listen(PORT, () => {
-  process.stdout.write(`Started on port ${clc.yellow(listener.address().port)}\n`);
+server.listen(PORT, () => {
+  process.stdout.write(`Started on port ${clc.yellow(PORT)}\n`);
 });
