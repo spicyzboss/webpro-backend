@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import multer from 'multer';
 import cors from 'cors';
 import {
-  getUser, payment, verifyPayment, sendChat, getChat,
+  getUser, payment, verifyPayment, getChat,
 } from './services/authenticated';
 import auth from './middlewares/auth';
 import {
@@ -28,11 +28,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/me', auth, getUser);
 
-app.post('/payment', auth, payment);
+app.get('/payment', auth, payment);
 
 app.post('/payment/verify', auth, verifyPayment);
-
-app.post('/chat', auth, sendChat);
 
 app.get('/chat', auth, getChat);
 

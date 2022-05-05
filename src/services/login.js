@@ -23,6 +23,18 @@ const login = async (req, res) => {
       where: {
         id: user.id,
       },
+      select: {
+        firstname: true,
+        lastname: true,
+        birth_date: true,
+        gender: true,
+        Premium: {
+          select: {
+            since: true,
+            member_id: true,
+          },
+        },
+      },
     });
 
     const userData = {
@@ -34,6 +46,8 @@ const login = async (req, res) => {
       gender: member.gender,
       email: user.email,
       isVerified: user.isVerified,
+      premium: Boolean(member.Premium),
+      premium_since: member.Premium ? member.Premium.since : '',
     };
 
     const token = jwt.sign(userData, process.env.JWT_SECRET_KEY);

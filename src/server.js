@@ -5,7 +5,10 @@ import clc from 'cli-color';
 import { config } from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import { PrismaClient } from '@prisma/client';
 import app from './app';
+
+const prisma = new PrismaClient();
 
 config();
 
@@ -19,10 +22,15 @@ const io = new Server(server, {
   },
 });
 
-app.set('io', io);
-
 const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, () => {
   process.stdout.write(`Started on port ${clc.yellow(PORT)}\n`);
+});
+
+io.on('connection', (socket) => {
+  socket.on('chat', async (data) => {
+    io.sockets.emit('chat', data);
+    await prisma.chat.create({ data });
+  });
 });
