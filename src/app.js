@@ -13,7 +13,7 @@ import {
   getProfileById,
   addmemberInterest,
   getUsameInt,
-  getIntById
+  getIntById,
 } from './services';
 
 config();
@@ -68,8 +68,8 @@ app.post('/get_profilebyid', auth, getProfileById);
 
 app.post('/add_memberinterest', auth, addmemberInterest);
 
-app.post('/get_usameint', auth, getUsameInt)
+app.post('/get_usameint', auth, getUsameInt);
 
-app.post('/get_intbyid', auth, getIntById)
+app.post('/get_intbyid', auth, getIntById);
 
 export default app;
