@@ -14,6 +14,14 @@ const checkEmail = async (req, res) => {
       },
     });
   }
+  else {
+    res.json({
+      status: {
+        code: 200,
+        message: 'You can use this email.',
+      },
+    });
+  }
 };
 
 export default checkEmail;
