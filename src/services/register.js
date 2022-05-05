@@ -101,6 +101,7 @@ const register = async (req, res) => {
         });
       }
     } catch (err) {
+      console.log(err);
       res.json({
         status: {
           code: 500,

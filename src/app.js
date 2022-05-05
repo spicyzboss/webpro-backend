@@ -8,7 +8,7 @@ import {
 } from './services/authenticated';
 import auth from './middlewares/auth';
 import {
-  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile, checkEmail,
+  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile, checkEmail, getInterest, getIdbyPost,
 
 } from './services';
 
@@ -40,18 +40,22 @@ app.post('/register', upload.single('profile_image'), register);
 
 app.get('/verify', mailVerification);
 
-app.post('/post', createPost);
+app.post('/post', auth, createPost);
 
-app.get('/post', findPost);
+app.post('/find_post', auth, findPost);
 
-app.post('/report', reportUser);
+app.post('/report', auth, reportUser);
 
-app.post('/ban', addToBlacklists);
+app.post('/ban', auth, addToBlacklists);
 
-app.post('/add_match', addFriend);
+app.post('/add_match', auth, addFriend);
 
-app.put('/edit_profile', editProfile);
+app.put('/edit_profile', auth, editProfile);
 
-app.post('/check_email', checkEmail);
+app.post('/check_email', auth, checkEmail);
+
+app.get('/get_interest', auth, getInterest);
+
+app.post('/get_idbypost', auth, getIdbyPost);
 
 export default app;
