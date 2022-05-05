@@ -8,7 +8,7 @@ import {
 } from './services/authenticated';
 import auth from './middlewares/auth';
 import {
-  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile, checkEmail,
+  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile, checkEmail, getInterest,
 
 } from './services';
 
@@ -56,4 +56,5 @@ app.put('/edit_profile', editProfile);
 
 app.post('/check_email', checkEmail);
 
+app.get('/get_interest', getInterest)
 export default app;

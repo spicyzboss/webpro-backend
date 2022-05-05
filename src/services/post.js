@@ -43,7 +43,8 @@ const createPost = async (req, res) => {
 
 const findPost = async (req, res) => {
   const { interest } = req.body;
-  const interestName = interest.map((obj) => obj.name);
+  const interestName = interest.map((obj) => obj.name[0].toUpperCase() + obj.name.substr(1).toLowerCase());
+  console.log(interestName)
   const interestitem = await prisma.interest.findMany({
     where: {
       name: { in: interestName },
