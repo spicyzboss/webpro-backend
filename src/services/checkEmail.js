@@ -13,8 +13,7 @@ const checkEmail = async (req, res) => {
         message: 'This email is already in use.',
       },
     });
-  }
-  else {
+  } else {
     res.json({
       status: {
         code: 200,
