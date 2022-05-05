@@ -7,14 +7,20 @@ const checkEmail = async (req, res) => {
     where: { email },
   });
   if (usedEmail) {
-    if (usedEmail) {
-      res.json({
-        status: {
-          code: 400,
-          message: 'This email is already in use.',
-        },
-      });
-    }
+    res.json({
+      status: {
+        code: 400,
+        message: 'This email is already in use.',
+      },
+    });
+  }
+  else {
+    res.json({
+      status: {
+        code: 200,
+        message: 'You can use this email.',
+      },
+    });
   }
 };
 
