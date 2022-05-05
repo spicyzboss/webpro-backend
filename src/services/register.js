@@ -26,7 +26,7 @@ const register = async (req, res) => {
       if (usedEmail) {
         res.json({
           status: {
-            code: 401,
+            code: 400,
             message: 'This email is already in use.',
           },
           user: {},
