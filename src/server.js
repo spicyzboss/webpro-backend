@@ -33,4 +33,14 @@ io.on('connection', (socket) => {
     io.sockets.emit('chat', data);
     await prisma.chat.create({ data });
   });
+
+  socket.on('groupChat', async (data) => {
+    io.sockets.emit('groupChat', data);
+    await prisma.groupChat.create({ data });
+    // data: {
+    //   from: id,
+    //   post_id: postID,
+    //   content,
+    // },
+  });
 });
