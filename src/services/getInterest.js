@@ -10,7 +10,7 @@ const getInterest = async (req, res) => {
                 message: 'query interest is completed',
             },
             interest: {
-                interest_name
+                interest
             }
         });
     } else {
