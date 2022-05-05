@@ -5,6 +5,7 @@ import getChat from './getChat';
 import sendGroupChat from './sendGroupChat';
 import getGroupChat from './getGroupChat';
 import refreshToken from './refreshToken';
+import getPostById from './getPostById';
 
 export {
   getUser,
@@ -14,4 +15,5 @@ export {
   getGroupChat,
   sendGroupChat,
   refreshToken,
+  getPostById,
 };

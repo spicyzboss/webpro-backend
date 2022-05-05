@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import multer from 'multer';
 import cors from 'cors';
 import {
-  getUser, payment, verifyPayment, getChat, refreshToken,
+  getUser, payment, verifyPayment, getChat, refreshToken, getPostById,
 } from './services/authenticated';
 import auth from './middlewares/auth';
 import {
@@ -71,6 +71,8 @@ app.post('/get_profilebyid', auth, getProfileById);
 app.post('/add_memberinterest', auth, addmemberInterest);
 
 app.post('/get_usameint', auth, getUsameInt);
+
+app.get('/get_postbid/:id', auth, getPostById);
 
 app.post('/get_intbyid', auth, getIntById);
 
