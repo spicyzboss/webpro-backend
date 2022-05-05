@@ -15,6 +15,10 @@ const groupChat = async (req, res) => {
       },
     });
 
+    /** @type {import ('socket.io').Socket} */
+    const io = req.app.get('io');
+    io.to(postID).emit('groupChat', chatRequest);
+
     res.json({
       status: {
         code: 200,

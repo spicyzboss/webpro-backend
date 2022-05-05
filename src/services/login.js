@@ -30,6 +30,7 @@ const login = async (req, res) => {
       firstname: member.firstname,
       lastname: member.lastname,
       age: new Date().getFullYear() - member.birth_date.getFullYear(),
+      profile_image: user.profile_image,
       gender: member.gender,
       email: user.email,
       isVerified: user.isVerified,
