@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 const getInterest = async (req, res) => {
     const interest = await prisma.interest.findMany()
+    const interestName = interest.map(obj => obj.name)
     if (interest) {
         res.json({
             status: {
@@ -10,7 +11,7 @@ const getInterest = async (req, res) => {
                 message: 'query interest is completed',
             },
             interest: {
-                interest
+                interestName
             }
         });
     } else {
