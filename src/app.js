@@ -14,7 +14,6 @@ import {
   addmemberInterest,
   getUsameInt,
   getIntById,
-  resetPassword,
 } from './services';
 
 config();
@@ -74,7 +73,5 @@ app.post('/add_memberinterest', auth, addmemberInterest);
 app.post('/get_usameint', auth, getUsameInt);
 
 app.post('/get_intbyid', auth, getIntById);
-
-app.post('/reset_password', auth, resetPassword);
 
 export default app;
