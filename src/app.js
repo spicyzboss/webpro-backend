@@ -9,7 +9,9 @@ import {
 import auth from './middlewares/auth';
 import {
   register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile, checkEmail, getInterest, getIdbyPost,
-
+  getPostData,
+  getProfileById,
+  addmemberInterest
 } from './services';
 
 config();
@@ -59,5 +61,11 @@ app.post('/check_email', auth, checkEmail);
 app.get('/get_interest', auth, getInterest);
 
 app.post('/get_idbypost', auth, getIdbyPost);
+
+app.get('/get_postdata', auth, getPostData)
+
+app.post('/get_profilebyid', auth, getProfileById)
+
+app.post('/add_memberinterest', auth, addmemberInterest)
 
 export default app;
