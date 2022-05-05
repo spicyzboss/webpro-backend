@@ -8,7 +8,7 @@ import {
 } from './services/authenticated';
 import auth from './middlewares/auth';
 import {
-  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile,
+  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile, checkEmail,
 
 } from './services';
 
@@ -51,5 +51,7 @@ app.post('/ban', addToBlacklists);
 app.post('/add_match', addFriend);
 
 app.put('/edit_profile', editProfile);
+
+app.post('/check_email', checkEmail);
 
 export default app;
