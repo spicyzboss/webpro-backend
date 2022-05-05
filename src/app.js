@@ -1,13 +1,14 @@
 import express from 'express';
 import { config } from 'dotenv';
 import bodyParser from 'body-parser';
+
 import cors from 'cors';
 import {
   getUser, payment, verifyPayment, sendChat, getChat,
 } from './services/authenticated';
 import auth from './middlewares/auth';
 import {
-  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists,
+  register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend,
 } from './services';
 
 config();
@@ -45,5 +46,7 @@ app.get('/post', findPost);
 app.post('/report', reportUser);
 
 app.post('/ban', addToBlacklists);
+
+app.post('/add_match', addFriend);
 
 export default app;
