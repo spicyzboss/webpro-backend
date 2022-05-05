@@ -31,12 +31,12 @@ server.listen(PORT, () => {
 io.on('connection', (socket) => {
   socket.on('chat', async (data) => {
     io.sockets.emit('chat', data);
-    await prisma.chat.create({ data });
+    await prisma.chat.create({ data: data.chat });
   });
 
   socket.on('groupChat', async (data) => {
     io.sockets.emit('groupChat', data);
-    await prisma.groupChat.create({ data });
+    await prisma.groupChat.create({ data: data.groupChat });
     // data: {
     //   from: id,
     //   post_id: postID,
