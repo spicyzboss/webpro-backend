@@ -21,7 +21,8 @@ const getProfileById = async (req, res) => {
     const memberItem = await member.map(obj => ({
         id: obj.id,
         firstname: obj.firstname,
-        lastname: obj.lastname
+        lastname: obj.lastname,
+        gender: obj.gender
     }))
     console.log(userPic, memberItem)
     if (userPic && memberItem) {

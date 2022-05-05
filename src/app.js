@@ -11,7 +11,9 @@ import {
   register, login, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile, checkEmail, getInterest, getIdbyPost,
   getPostData,
   getProfileById,
-  addmemberInterest
+  addmemberInterest,
+  getUsameInt,
+  getIntById
 } from './services';
 
 config();
@@ -65,5 +67,9 @@ app.get('/get_postdata', auth, getPostData)
 app.post('/get_profilebyid', auth, getProfileById)
 
 app.post('/add_memberinterest', auth, addmemberInterest)
+
+app.post('/get_usameint', auth, getUsameInt)
+
+app.post('/get_intbyid', auth, getIntById)
 
 export default app;

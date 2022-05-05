@@ -3,10 +3,10 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const addFriend = async (req, res) => {
-  const { id } = req.body;
+  const { userid, id } = req.body;
   const memberMember = await prisma.memberMember.create({
     data: {
-      member_id: 4,
+      member_id: userid,
       friend_id: id,
     },
   });

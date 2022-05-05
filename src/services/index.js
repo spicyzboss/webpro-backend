@@ -11,8 +11,11 @@ import getIdbyPost from './getIdbyInterest';
 import getPostData from './getPostData';
 import getProfileById from './getProfileById';
 import addmemberInterest from './addInterest';
+import getUsameInt from './getUsersameInterest';
+import getIntById from './getInterestById';
+
 export {
 
   login, register, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile, checkEmail, getInterest, getIdbyPost, getPostData,
-  getProfileById, addmemberInterest
+  getProfileById, addmemberInterest, getUsameInt, getIntById
 };
