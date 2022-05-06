@@ -1,19 +1,18 @@
 import { PrismaClient } from '@prisma/client';
-import { filter } from 'core-js/core/array';
 
 const prisma = new PrismaClient();
 const getProfileMember = async (req, res) => {
     const { id, friend } = req.body
     const filterFriend = friend.map(obj => obj.id)
+    console.log(filterFriend)
     const memberMember = await prisma.memberMember.findMany({
         where: {
             member_id: id,
-            NOT: {
-                friend_id: { in: filter }
-            }
+            friend_id: { in: filterFriend },
         }
-    })
-    const filterId = memberMember.map(obj => obj.friend_id)
+    }
+    );
+    const filterId = memberMember.map(obj => ({ id: obj.friend_id }))
     console.log(filterId)
     if (filterId) {
         res.json({
