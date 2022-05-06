@@ -13,8 +13,10 @@ import getProfileById from './getProfileById';
 import addmemberInterest from './addInterest';
 import getUsameInt from './getUsersameInterest';
 import getIntById from './getInterestById';
+import getProfileMember from './getFriendMember';
+
 
 export {
   login, register, mailVerification, createPost, findPost, reportUser, addToBlacklists, addFriend, editProfile, checkEmail, getInterest, getIdbyPost, getPostData,
-  getProfileById, addmemberInterest, getUsameInt, getIntById,
+  getProfileById, addmemberInterest, getUsameInt, getIntById, getProfileMember
 };

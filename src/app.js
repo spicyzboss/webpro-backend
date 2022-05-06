@@ -14,6 +14,7 @@ import {
   addmemberInterest,
   getUsameInt,
   getIntById,
+  getProfileMember,
 } from './services';
 
 config();
@@ -81,5 +82,7 @@ app.get('/get_groupChat/:id', auth, getGroupChat);
 app.get('/get_admin', auth, getAdmin);
 
 app.get('/get_blacklists', auth, getBlacklists);
+
+app.post('/get_profilemember', auth, getProfileMember)
 
 export default app;
