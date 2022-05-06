@@ -50,4 +50,31 @@ const addToBlacklists = async (req, res) => {
   }
 };
 
-export { reportUser, addToBlacklists };
+const removeBlacklist = async (req, res) => {
+  let { id } = req.params;
+  id = Number(id);
+  const user = await prisma.blacklist.delete({
+    where: {
+      id,
+    },
+  });
+  if (user) {
+    res.json({
+      status: {
+        code: 200,
+        message: 'remove successfully',
+      },
+      user,
+    });
+  } else {
+    res.json({
+      status: {
+        code: 404,
+        message: 'blacklist not found',
+      },
+      user,
+    });
+  }
+};
+
+export { reportUser, addToBlacklists, removeBlacklist };

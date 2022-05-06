@@ -8,6 +8,7 @@ import refreshToken from './refreshToken';
 import getPostById from './getPostById';
 import getAdmin from './getAdmin';
 import getBlacklists from './getBlacklists';
+import getReport from './getReport';
 
 export {
   getUser,
@@ -20,4 +21,5 @@ export {
   getPostById,
   getAdmin,
   getBlacklists,
+  getReport,
 };

@@ -20,6 +20,8 @@ model User {
   Admin         Admin?
   sender        Chat[]   @relation("sender")
   target        Chat[]   @relation("target")
+  reporter      Report[] @relation("reporter")
+  report_target Report[] @relation("report_target")
 
   @@map("users")
 }
@@ -44,6 +46,7 @@ model Member {
   MemberMember2         MemberMember[]   @relation("member2")
   verificationSessionId Int?
 
+  Blacklist Blacklist[]
   @@map("members")
 }
 
@@ -71,17 +74,20 @@ model Blacklist {
   id         Int      @id @default(autoincrement())
   reason     String   @db.VarChar(255)
   created_at DateTime @default(now()) @db.Timestamp(3)
+  member     Member   @relation(fields: [member_id], references: [id])
   member_id  Int
 
   @@map("blacklists")
 }
 
 model Report {
-  id          Int      @id @default(autoincrement())
-  content     String   @db.VarChar(255)
-  report_from Int
-  report_to   Int
-  created_at  DateTime @default(now()) @db.Timestamp(3)
+  id            Int      @id @default(autoincrement())
+  content       String   @db.VarChar(255)
+  reporter      User     @relation("reporter", fields: [report_from], references: [id])
+  report_from   Int
+  report_target User     @relation("report_target", fields: [report_to], references: [id])
+  report_to     Int
+  created_at    DateTime @default(now()) @db.Timestamp(3)
 
   @@map("reports")
 }
