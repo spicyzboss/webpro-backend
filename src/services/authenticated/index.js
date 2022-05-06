@@ -6,6 +6,8 @@ import sendGroupChat from './sendGroupChat';
 import getGroupChat from './getGroupChat';
 import refreshToken from './refreshToken';
 import getPostById from './getPostById';
+import getAdmin from './getAdmin';
+import getBlacklists from './getBlacklists';
 
 export {
   getUser,
@@ -16,4 +18,6 @@ export {
   sendGroupChat,
   refreshToken,
   getPostById,
+  getAdmin,
+  getBlacklists,
 };
