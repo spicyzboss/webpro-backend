@@ -36,11 +36,16 @@ io.on('connection', (socket) => {
 
   socket.on('groupChat', async (data) => {
     io.sockets.emit('groupChat', data);
-    await prisma.groupChat.create({ data: data.groupChat });
-    // data: {
-    //   from: id,
-    //   post_id: postID,
-    //   content,
-    // },
+    await prisma.groupChat.create({
+      data: {
+        from: data.groupChat.from,
+        content: data.groupChat.content,
+        post: {
+          connect: {
+            id: Number(data.groupChat.post_id),
+          },
+        },
+      },
+    });
   });
 });

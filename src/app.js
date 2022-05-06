@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import multer from 'multer';
 import cors from 'cors';
 import {
-  getUser, payment, verifyPayment, getChat, refreshToken, getPostById,
+  getUser, payment, verifyPayment, getChat, refreshToken, getPostById, getGroupChat, getAdmin, getBlacklists,
 } from './services/authenticated';
 import auth from './middlewares/auth';
 import {
@@ -75,5 +75,11 @@ app.post('/get_usameint', auth, getUsameInt);
 app.get('/get_postbid/:id', auth, getPostById);
 
 app.post('/get_intbyid', auth, getIntById);
+
+app.get('/get_groupChat/:id', auth, getGroupChat);
+
+app.get('/get_admin', auth, getAdmin);
+
+app.get('/get_blacklists', auth, getBlacklists);
 
 export default app;
