@@ -80,7 +80,7 @@ const register = async (req, res) => {
               },
             });
 
-            await mailSender(member.id, user.email);
+            // await mailSender(member.id, user.email);
 
             res.json({
               status: {
