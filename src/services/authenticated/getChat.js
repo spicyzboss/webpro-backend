@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -47,6 +47,45 @@ const getChat = async (req, res) => {
     },
   });
 
+  const user = await prisma.memberMember.findMany({
+    where: {
+      OR: [
+        {
+          member_id: req.user.id,
+        },
+        {
+          friend_id: req.user.id,
+        },
+      ],
+    },
+    select: {
+      friend: {
+        select: {
+          id: true,
+          user: {
+            select: {
+              profile_image: true,
+            },
+          },
+          firstname: true,
+          lastname: true,
+        },
+      },
+      member: {
+        select: {
+          id: true,
+          user: {
+            select: {
+              profile_image: true,
+            },
+          },
+          firstname: true,
+          lastname: true,
+        },
+      },
+    },
+  });
+
   const chatArray = chat.map((item) => ({
     content: item.content,
     created_at: item.created_at,
@@ -55,30 +94,33 @@ const getChat = async (req, res) => {
     id: item.id,
   }));
 
-  const userArray = chat.map((item) => {
-    if (req.user.id === item.sender.id) {
+  const userArray = user
+    .filter((v) => v.friend.id !== req.user.id || v.member.id !== req.user.id)
+    .map((item) => {
+      if (item.friend.id === req.user.id) {
+        return {
+          id: item.member.id,
+          profile_image: item.member.user.profile_image,
+          firstname: item.member.firstname,
+          lastname: item.member.lastname,
+        };
+      }
+
       return {
-        id: item.target.id,
-        profile_image: item.target.profile_image,
-        firstname: item.target.Member.firstname,
-        lastname: item.target.Member.lastname,
+        id: item.friend.id,
+        profile_image: item.friend.user.profile_image,
+        firstname: item.friend.firstname,
+        lastname: item.friend.lastname,
       };
-    }
-    return {
-      id: item.sender.id,
-      profile_image: item.sender.profile_image,
-      firstname: item.sender.Member.firstname,
-      lastname: item.sender.Member.lastname,
-    };
-  });
+    });
 
   res.json({
     status: {
       code: 200,
-      message: 'Success',
+      message: "Success",
     },
     chat: chatArray,
-    user: [...new Set(userArray.map((v) => JSON.stringify(v)))].map((v) => JSON.parse(v)),
+    user: userArray,
   });
 };
 
